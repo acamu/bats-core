@@ -61,6 +61,14 @@ fixtures suite
   [ "${lines[4]}" = "ok 2 more truth" ]
   [ "${lines[5]}" = "begin 3 quasi-truth" ]
   [ "${lines[6]}" = "not ok 3 quasi-truth" ]
+  [ "${lines[1]}" = "suite bats.a" ]
+  [ "${lines[2]}" = "begin 1 truth" ]
+  [ "${lines[3]}" = "ok 1 truth" ]
+  [ "${lines[4]}" = "suite bats.b" ]
+  [ "${lines[5]}" = "begin 2 more truth" ]
+  [ "${lines[6]}" = "ok 2 more truth" ]
+  [ "${lines[7]}" = "begin 3 quasi-truth" ]
+  [ "${lines[8]}" = "not ok 3 quasi-truth" ]
 }
 
 @test "recursive support (short option)" {
