@@ -169,7 +169,7 @@ if [[ -n "$junit" ]]; then
   echo "junit"
   formatter='bats-format-junit'
   extended_syntax_flag='-x'
-  pretty=
+  pretty=1
 else
   formatter='bats-format-tap-stream'
   extended_syntax_flag=
