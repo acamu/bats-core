@@ -123,7 +123,6 @@ while [[ "$#" -ne 0 ]]; do
     ;;
    -u|--junit)
     junit=1
-    pretty=
     ;;
   -*)
     abort "Bad command line option '$1'"
@@ -167,8 +166,10 @@ else
 fi
 
 if [[ -n "$junit" ]]; then
+  echo "junit"
   formatter='bats-format-junit'
   extended_syntax_flag='-x'
+  pretty=
 else
   formatter='bats-format-tap-stream'
   extended_syntax_flag=
