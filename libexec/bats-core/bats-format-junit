@@ -2,7 +2,6 @@
 set -e
 
 header_pattern='[0-9]+\.\.[0-9]+'
-output_filename="TEST-save.xml"
 IFS= read -r header
 
 if [[ "$header" =~ $header_pattern ]]; then
@@ -13,37 +12,37 @@ if [[ "$header" =~ $header_pattern ]]; then
   name=""
 else
   # If the first line isn't a TAP plan, print it and pass the rest through
-  printf "%s\n" "$header" | tee -a $output_filename
+  printf "%s\n" "$header"
   exec cat
 fi
 
 header() {
     printf "\
 <?xml version=\"1.0\" encoding=\"UTF-8\"?>
-<testsuite tests=\"${count}\" failures=\"${failures}\" skip=\"${skipped}\">\n" | tee -a $output_filename
+<testsuite tests=\"${count}\" failures=\"${failures}\" skip=\"${skipped}\">\n"
 }
 
 footer() {
-    printf "</testsuite>\n" | tee -a $output_filename
+    printf "</testsuite>\n"
 }
 
 
 pass() {
-    echo "    <testcase classname=\"$class\" name=\"$name\"/>\n" | tee -a $output_filename
+    echo "    <testcase classname=\"$class\" name=\"$name\"/>\n"
 }
 
 fail() {
     echo "\
     <testcase classname=\"$class\" name=\"$name\">
         <failure><![CDATA[$1]]></failure>
-    </testcase>\n" | tee -a $output_filename
+    </testcase>\n"
 }
 
 skip() {
     echo "\
     <testcase classname=\"$class\" name=\"$name\">
         <skipped>$1</skipped>
-    </testcase>\n" | tee -a $output_filename
+    </testcase>\n"
 }
 
 _buffer=""
