@@ -20,7 +20,7 @@ fi
 header() {
     printf "\
 <?xml version=\"1.0\" encoding=\"UTF-8\"?>
-<testsuite tests=\"${count}\" failures=\"${failures}\" skip=\"${skipped}\">\n" | tee $output_filename
+<testsuite tests=\"${count}\" failures=\"${failures}\" skip=\"${skipped}\">\n" | tee -a $output_filename
 }
 
 footer() {
