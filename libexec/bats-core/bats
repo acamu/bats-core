@@ -104,6 +104,10 @@ while [[ "$#" -ne 0 ]]; do
   -c|--count)
     flags+=('-c')
     ;;
+  -x|--extended)
+    pretty=""
+    extended_syntax_flag="-x"
+    ;;
   -f|--filter)
     shift
     flags+=('-f' "$1")
@@ -116,6 +120,9 @@ while [[ "$#" -ne 0 ]]; do
     ;;
   -p|--pretty)
     pretty=1
+    ;;
+   -u|--junit)
+    junit="1"
     ;;
   -*)
     abort "Bad command line option '$1'"
