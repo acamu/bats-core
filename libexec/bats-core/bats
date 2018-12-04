@@ -165,7 +165,7 @@ else
   command='bats-exec-suite'
 fi
 
-if [ -n "$junit" ]; then
+if [[ -n "$junit" ]]; then
   formatter='bats-format-junit'
   extended_syntax_flag='-x'
 else
