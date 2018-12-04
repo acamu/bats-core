@@ -33,7 +33,6 @@ Usage: $cmd [-cr] [-f <regex>] [-p | -t] <test>...
   -r, --recursive  Include tests in subdirectories
   -t, --tap        Show results in TAP format
   -v, --version    Display the version number
-  -x, --extended   Show results in extended TAP format
   -u, --junit      Show results in JUnit format, hudson compatible
 
   For more information, see https://github.com/bats-core/bats-core
@@ -104,10 +103,6 @@ while [[ "$#" -ne 0 ]]; do
   -c|--count)
     flags+=('-c')
     ;;
-  -x|--extended)
-    pretty=1
-    extended_syntax_flag='-x'
-    ;;
   -f|--filter)
     shift
     flags+=('-f' "$1")
@@ -168,14 +163,14 @@ else
   command='bats-exec-suite'
 fi
 
-#if [[ -n "$junit" ]]; then
+if [[ -n "$junit" ]]; then
 #  formatter='bats-format-junit'
   #extended_syntax_flag='-x'
-#  pretty=1
+  pretty=1
 #else
 #  formatter='bats-format-tap-stream'
 #  extended_syntax_flag=
-#fi
+fi
 
 
 set -o pipefail execfail
@@ -183,6 +178,6 @@ if [[ -z "$pretty" ]]; then
   echo "$command" "${flags[@]}" "${filenames[@]}" "simple"
   exec "$command" "${flags[@]}" "${filenames[@]}"
 else
-  echo "$command" "${extended_syntax_flag}" "${flags[@]}" "${filenames[@]}" $formatter
-  exec "$command" "${extended_syntax_flag}" "${flags[@]}" "${filenames[@]}" | $formatter | tee TEST-Output.xml
+  echo "$command" -x "${flags[@]}" "${filenames[@]}" $formatter
+  exec "$command" -x "${flags[@]}" "${filenames[@]}" | $formatter | tee TEST-Output.xml
 fi
