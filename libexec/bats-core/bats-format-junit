@@ -13,7 +13,7 @@ if [[ "$header" =~ $header_pattern ]]; then
   name=""
 else
   # If the first line isn't a TAP plan, print it and pass the rest through
-  printf "%s\n" "$header" > output_filename
+  printf "%s\n" "$header" > $output_filename
   exec cat
 fi
 
