@@ -167,7 +167,7 @@ fi
 
 if [[ -n "$junit" ]]; then
   formatter='bats-format-junit'
-  extended_syntax_flag='-x'
+  #extended_syntax_flag='-x'
   pretty=1
 else
   formatter='bats-format-tap-stream'
