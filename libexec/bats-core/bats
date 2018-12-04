@@ -122,7 +122,7 @@ while [[ "$#" -ne 0 ]]; do
     pretty=1
     ;;
    -u|--junit)
-    junit="1"
+    junit=1
     ;;
   -*)
     abort "Bad command line option '$1'"
@@ -166,18 +166,15 @@ else
 fi
 
 if [ -n "$junit" ]; then
-  extended_syntax_flag="-x"
-  formatter="bats-format-junit"
-elif [ -n "$pretty" ]; then
-  extended_syntax_flag="-x"
-  formatter="bats-format-tap-stream"
+  formatter='bats-format-junit'
 else
-  formatter="cat"
+ formatter='bats-format-tap-stream'
 fi
+
 
 set -o pipefail execfail
 if [[ -z "$pretty" ]]; then
   exec "$command" "${flags[@]}" "${filenames[@]}"
 else
-  exec "$command" -x "${flags[@]}" "${filenames[@]}" | bats-format-tap-stream
+  exec "$command" -x "${flags[@]}" "${filenames[@]}" | $formatter
 fi
