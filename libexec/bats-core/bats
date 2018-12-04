@@ -165,6 +165,16 @@ else
   command='bats-exec-suite'
 fi
 
+if [ -n "$junit" ]; then
+  extended_syntax_flag="-x"
+  formatter="bats-format-junit"
+elif [ -n "$pretty" ]; then
+  extended_syntax_flag="-x"
+  formatter="bats-format-tap-stream"
+else
+  formatter="cat"
+fi
+
 set -o pipefail execfail
 if [[ -z "$pretty" ]]; then
   exec "$command" "${flags[@]}" "${filenames[@]}"
