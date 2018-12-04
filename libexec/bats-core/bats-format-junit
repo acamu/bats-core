@@ -13,7 +13,7 @@ if [[ "$header" =~ $header_pattern ]]; then
   name=""
 else
   # If the first line isn't a TAP plan, print it and pass the rest through
-  printf "%s\n" "$header" | tee $output_filename
+  printf "%s\n" "$header" | tee -a $output_filename
   exec cat
 fi
 
@@ -24,26 +24,26 @@ header() {
 }
 
 footer() {
-    printf "</testsuite>\n" | tee $output_filename
+    printf "</testsuite>\n" | tee -a $output_filename
 }
 
 
 pass() {
-    echo "    <testcase classname=\"$class\" name=\"$name\"/>\n" | tee $output_filename
+    echo "    <testcase classname=\"$class\" name=\"$name\"/>\n" | tee -a $output_filename
 }
 
 fail() {
     echo "\
     <testcase classname=\"$class\" name=\"$name\">
         <failure><![CDATA[$1]]></failure>
-    </testcase>\n" | tee $output_filename
+    </testcase>\n" | tee -a $output_filename
 }
 
 skip() {
     echo "\
     <testcase classname=\"$class\" name=\"$name\">
         <skipped>$1</skipped>
-    </testcase>\n" | tee $output_filename
+    </testcase>\n" | tee -a $output_filename
 }
 
 _buffer=""
