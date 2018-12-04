@@ -123,7 +123,9 @@ while [[ "$#" -ne 0 ]]; do
     formatter='bats-format-tap-stream'
     ;;
    -u|--junit)
+    pretty=
     junit=1
+    formatter='bats-format-junit'
     ;;
   -*)
     abort "Bad command line option '$1'"
