@@ -105,8 +105,8 @@ while [[ "$#" -ne 0 ]]; do
     flags+=('-c')
     ;;
   -x|--extended)
-    pretty=""
-    extended_syntax_flag="-x"
+    pretty=
+    extended_syntax_flag='-x'
     ;;
   -f|--filter)
     shift
@@ -167,8 +167,10 @@ fi
 
 if [ -n "$junit" ]; then
   formatter='bats-format-junit'
+  extended_syntax_flag='-x'
 else
-  ormatter='bats-format-tap-stream'
+  formatter='bats-format-tap-stream'
+  extended_syntax_flag=
 fi
 
 
@@ -176,5 +178,5 @@ set -o pipefail execfail
 if [[ -z "$pretty" ]]; then
   exec "$command" "${flags[@]}" "${filenames[@]}"
 else
-  exec "$command" -x "${flags[@]}" "${filenames[@]}" | $formatter
+  exec "$command" "${extended_syntax_flag}" "${flags[@]}" "${filenames[@]}" | $formatter
 fi
