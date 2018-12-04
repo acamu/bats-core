@@ -94,8 +94,10 @@ while IFS= read -r line; do
     name="${line#* $index }"
     ;;
   "ok "* )
+   echo "OK"
     skip_expr="ok $index (\(([^)]*)\))? # skip"
     if [[ "$line" =~ $skip_expr ]]; then
+      echo "skipped"
       let skipped+=1
       buffer skip "${BASH_REMATCH[2]}"
     else
