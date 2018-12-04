@@ -79,6 +79,7 @@ trap finish EXIT
 
 
 while IFS= read -r line; do
+ echo $line
   case "$line" in
   "suite "*)
     flush_log
