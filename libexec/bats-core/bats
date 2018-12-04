@@ -166,15 +166,19 @@ else
 fi
 
 if [ -n "$junit" ]; then
+echo "junit"
   formatter='bats-format-junit'
 else
+echo "default"
  formatter='bats-format-tap-stream'
 fi
 
 
 set -o pipefail execfail
 if [[ -z "$pretty" ]]; then
+echo "$command" "${flags[@]}" "${filenames[@]}"
   exec "$command" "${flags[@]}" "${filenames[@]}"
 else
+echo "$command" -x "${flags[@]}" "${filenames[@]}"
   exec "$command" -x "${flags[@]}" "${filenames[@]}" | $formatter
 fi
