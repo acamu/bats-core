@@ -182,5 +182,5 @@ if [[ -z "$pretty" ]]; then
   exec "$command" "${flags[@]}" "${filenames[@]}"
 else
   echo "$command" "${extended_syntax_flag}" "${flags[@]}" "${filenames[@]}" $formatter
-  exec "$command" "${extended_syntax_flag}" "${flags[@]}" "${filenames[@]}" | $formatter > TEST-Output.xml
+  exec "$command" "${extended_syntax_flag}" "${flags[@]}" "${filenames[@]}" | $formatter | tee TEST-Output.xml
 fi
