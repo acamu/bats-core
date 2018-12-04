@@ -118,7 +118,7 @@ while [[ "$#" -ne 0 ]]; do
     formatter='bats-format-tap-stream'
     ;;
   -u|--junit)
-    #pretty=1
+    pretty=1
      #junit=1
     formatter='bats-format-junit'
     ;;
