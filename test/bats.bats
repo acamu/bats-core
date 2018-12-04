@@ -467,7 +467,3 @@ END_OF_ERR_MSG
   [ "${lines[6]}" = '# baz' ]
 }
 
-@test "testing stdout and stderr are separated" {
-  run bats "$FIXTURE_ROOT/stdout_stderr_separate.bats"
-  [ $status -eq 0 ]
-}
