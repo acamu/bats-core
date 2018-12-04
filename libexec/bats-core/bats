@@ -176,7 +176,9 @@ fi
 
 set -o pipefail execfail
 if [[ -z "$pretty" ]]; then
+ echo "pretty"
   exec "$command" "${flags[@]}" "${filenames[@]}"
 else
+ echo "best"
   exec "$command" "${extended_syntax_flag}" "${flags[@]}" "${filenames[@]}" | $formatter > TEST-Output.xml
 fi
