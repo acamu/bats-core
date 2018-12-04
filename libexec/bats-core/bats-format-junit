@@ -2,6 +2,7 @@
 set -e
 
 header_pattern='[0-9]+\.\.[0-9]+'
+output_filename="TEST-save.xml"
 IFS= read -r header
 
 if [[ "$header" =~ $header_pattern ]]; then
@@ -12,7 +13,7 @@ if [[ "$header" =~ $header_pattern ]]; then
   name=""
 else
   # If the first line isn't a TAP plan, print it and pass the rest through
-  printf "%s\n" "$header"
+  printf "%s\n" "$header" > output_filename
   exec cat
 fi
 
@@ -71,8 +72,8 @@ flush_log() {
 finish() {
     flush_log
     header
-		flush
-		footer
+    flush
+    footer
 }
 
 trap finish EXIT
