@@ -13,37 +13,37 @@ if [[ "$header" =~ $header_pattern ]]; then
   name=""
 else
   # If the first line isn't a TAP plan, print it and pass the rest through
-  printf "%s\n" "$header" > $output_filename
+  printf "%s\n" "$header" >> $output_filename
   exec cat
 fi
 
 header() {
     printf "\
 <?xml version=\"1.0\" encoding=\"UTF-8\"?>
-<testsuite tests=\"${count}\" failures=\"${failures}\" skip=\"${skipped}\">\n"
+<testsuite tests=\"${count}\" failures=\"${failures}\" skip=\"${skipped}\">\n" >> $output_filename
 }
 
 footer() {
-    printf "</testsuite>\n"
+    printf "</testsuite>\n" >> $output_filename
 }
 
 
 pass() {
-    echo "    <testcase classname=\"$class\" name=\"$name\"/>\n"
+    echo "    <testcase classname=\"$class\" name=\"$name\"/>\n" >> $output_filename
 }
 
 fail() {
     echo "\
     <testcase classname=\"$class\" name=\"$name\">
         <failure><![CDATA[$1]]></failure>
-    </testcase>\n"
+    </testcase>\n" >> $output_filename
 }
 
 skip() {
     echo "\
     <testcase classname=\"$class\" name=\"$name\">
         <skipped>$1</skipped>
-    </testcase>\n"
+    </testcase>\n" >> $output_filename
 }
 
 _buffer=""
