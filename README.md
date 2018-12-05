@@ -182,7 +182,7 @@ supports:
 
 ```
 Bats x.y.z
-Usage: bats [-cr] [-f <regex>] [-p | -t] <test>...
+Usage: bats [-cr] [-f <regex>] [-p | -t] [-o <filename>] <test>...
        bats [-h | -v]
 
   <test> is the path to a Bats test file, or the path to a directory
@@ -195,6 +195,8 @@ Usage: bats [-cr] [-f <regex>] [-p | -t] <test>...
   -r, --recursive  Include tests in subdirectories
   -t, --tap        Show results in TAP format
   -v, --version    Display the version number
+  -u, --junit      Show results in JUnit format, hudson compatible
+  -o, --output <filename>  Write test results to <filename>
 
   For more information, see https://github.com/bats-core/bats-core
 ```
