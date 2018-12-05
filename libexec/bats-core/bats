@@ -173,9 +173,9 @@ if [[ -z "$pretty" ]]; then
   echo "$command" "${flags[@]}" "${filenames[@]}" "simple"
   exec "$command" "${flags[@]}" "${filenames[@]}"
 else
-  if [[ -n $BATS_TAPOUT_FILE ]]; then
-    echo "$command" -x "${flags[@]}" "${filenames[@]}" $formatter $BATS_TAPOUT_FILE
-    exec "$command" -x "${flags[@]}" "${filenames[@]}" | $formatter | tee $BATS_TAPOUT_FILE
+  if [[ -n $BATS_OUT_FILE ]]; then
+    echo "$command" -x "${flags[@]}" "${filenames[@]}" $formatter $BATS_OUT_FILE
+    exec "$command" -x "${flags[@]}" "${filenames[@]}" | $formatter | tee $BATS_OUT_FILE
   else
     echo "$command" -x "${flags[@]}" "${filenames[@]}" $formatter
     exec "$command" -x "${flags[@]}" "${filenames[@]}" | $formatter
