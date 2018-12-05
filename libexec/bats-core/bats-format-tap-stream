@@ -36,7 +36,7 @@ begin() {
 
 pass() {
   go_to_column 0
-  buffer ' ✓ %s' "$name"
+  buffer ' $(set_color 2)✓$(clear_color) %s' "$name"
   advance
 }
 
