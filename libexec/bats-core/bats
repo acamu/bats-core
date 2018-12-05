@@ -34,6 +34,7 @@ Usage: $cmd [-cr] [-f <regex>] [-p | -t] <test>...
   -t, --tap        Show results in TAP format
   -v, --version    Display the version number
   -u, --junit      Show results in JUnit format, hudson compatible
+  -o, --output <filename>  Write test results to <filename>
 
   For more information, see https://github.com/bats-core/bats-core
 
@@ -122,6 +123,10 @@ while [[ "$#" -ne 0 ]]; do
      #junit=1
     formatter='bats-format-junit'
     ;;
+  -o|--output)
+    shift
+    BATS_OUT_FILE="$1"
+    ;;
   -*)
     abort "Bad command line option '$1'"
     ;;
@@ -163,21 +168,16 @@ else
   command='bats-exec-suite'
 fi
 
-#if [[ -n "$junit" ]]; then
-#  formatter='bats-format-junit'
-  #extended_syntax_flag='-x'
-#  pretty=1
-#else
-#  formatter='bats-format-tap-stream'
-#  extended_syntax_flag=
-#fi
-
-echo "$pretty"
 set -o pipefail execfail
 if [[ -z "$pretty" ]]; then
   echo "$command" "${flags[@]}" "${filenames[@]}" "simple"
   exec "$command" "${flags[@]}" "${filenames[@]}"
 else
-  echo "$command" -x "${flags[@]}" "${filenames[@]}" $formatter
-  exec "$command" -x "${flags[@]}" "${filenames[@]}" | $formatter | tee TEST-Output.xml
+  if [[ -n $BATS_TAPOUT_FILE ]]; then
+    echo "$command" -x "${flags[@]}" "${filenames[@]}" $formatter $BATS_TAPOUT_FILE
+    exec "$command" -x "${flags[@]}" "${filenames[@]}" | $formatter | tee $BATS_TAPOUT_FILE
+  else
+    echo "$command" -x "${flags[@]}" "${filenames[@]}" $formatter
+    exec "$command" -x "${flags[@]}" "${filenames[@]}" | $formatter
+  fi
 fi
