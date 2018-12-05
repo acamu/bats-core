@@ -170,14 +170,14 @@ fi
 
 set -o pipefail execfail
 if [[ -z "$pretty" ]]; then
-  echo "$command" "${flags[@]}" "${filenames[@]}" "simple"
+#  echo "$command" "${flags[@]}" "${filenames[@]}" "simple"
   exec "$command" "${flags[@]}" "${filenames[@]}"
 else
   if [[ -n $BATS_OUT_FILE ]]; then
-    echo "$command" -x "${flags[@]}" "${filenames[@]}" $formatter $BATS_OUT_FILE
+#    echo "$command" -x "${flags[@]}" "${filenames[@]}" $formatter $BATS_OUT_FILE
     exec "$command" -x "${flags[@]}" "${filenames[@]}" | $formatter | tee $BATS_OUT_FILE
   else
-    echo "$command" -x "${flags[@]}" "${filenames[@]}" $formatter
+#    echo "$command" -x "${flags[@]}" "${filenames[@]}" $formatter
     exec "$command" -x "${flags[@]}" "${filenames[@]}" | $formatter
   fi
 fi
