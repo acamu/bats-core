@@ -65,19 +65,9 @@ run() {
   local origFlags="$-"
   set +eET
   local origIFS="$IFS"
-  
-  #eval "$({ t_sdterr=$({ t_stdout=$("$@"); t_ret=$?; } 2>&1; declare -p t_stdout  >&2; declare -pi t_ret >&2); declare -p t_sdterr; } 2>&1)"
-  #status=$t_ret
-  #output="${t_stdout}${t_sdterr}"
-  #stdout=$t_stdout
-  #stderr=$t_sdterr
-  
-  #output="$("$@" 2>&1)"
-  #status="$?"
+
   IFS=$'\n' lines=($output)
   IFS="$origIFS"
- # IFS=$'\n' stdlines=($t_stdout)
- # IFS=$'\n' errlines=($t_sdterr)
   set "-$origFlags"
 }
 
